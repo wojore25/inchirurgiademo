@@ -3,6 +3,7 @@ package com.internet.inchirurgiademo.entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,29 +25,27 @@ public class Post {
     @Column(name = "image")
     private String image;
 
-    @JoinTable(name = "posts_relation",
-            joinColumns = {@JoinColumn(name = "parent_id", referencedColumnName = "id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "post_id", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY,
-                cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
-    private List<Post> parentPostList = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "parentPostList", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "childPost", fetch = FetchType.LAZY,
+                cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
+    private List<PostRelation> childPostRelationList = new LinkedList<>();
+
+    @OneToMany(mappedBy = "parentPost", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
-    private List<Post> childPostList = new ArrayList<>();
+    private List<PostRelation> parentPostRelationList = new LinkedList<>();
 
     @OneToMany(mappedBy = "post", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<PostSection> postSectionList = new ArrayList<>();
+    private List<PostSection> postSectionList = new LinkedList<>();
 
 
     @ManyToMany(mappedBy = "postList",fetch = FetchType.LAZY,
                 cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Tag> tagList = new ArrayList<>();
+    private List<Tag> tagList = new LinkedList<>();
 
     @OneToMany( mappedBy = "post",
                 fetch = FetchType.LAZY,
                 cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<PartTag> partTagList = new ArrayList<>();
+    private List<PartTag> partTagList = new LinkedList<>();
 
 
 
@@ -69,13 +68,9 @@ public class Post {
         return image;
     }
 
-    public List<Post> getParentPostList() {
-        return parentPostList;
-    }
 
-    public List<Post> getChildPostList() {
-        return childPostList;
-    }
+
+
 
     public List<PostSection> getPostSectionList() {
         return postSectionList;
@@ -99,17 +94,6 @@ public class Post {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public void addParentPost(Post parentPost) {
-        if (this.parentPostList == null) this.parentPostList = new ArrayList<>();
-        this.parentPostList.add(parentPost);
-    }
-
-    private void addChildPost(Post post) {
-        if (this.childPostList == null) this.childPostList = new ArrayList<>();
-        this.childPostList.add(post);
-        post.addParentPost(this);
     }
 
     public void addPostSection(PostSection postSection) {

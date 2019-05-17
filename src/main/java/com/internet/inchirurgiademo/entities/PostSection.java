@@ -24,7 +24,7 @@ public class PostSection {
     @Column(name = "position")
     private Integer sectionPosition;
 
-    @OneToMany(mappedBy = "postSection")
+    @OneToMany(mappedBy = "postSection", fetch = FetchType.EAGER)
     private List<PartTable> partTableList = new ArrayList<>();
 
     public PostSection() {

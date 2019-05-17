@@ -1,12 +1,15 @@
-package com.internet.inchirurgiademo.temp;
+package com.internet.inchirurgiademo.dto;
 
 public class HeaderCell {
-    private String wide;
-    private String name;
 
-    public HeaderCell(String wide, String name) {
+    private String name;
+    private String wide;
+    private String title;
+
+    public HeaderCell(String name, String wide, String title) {
         this.wide = wide;
         this.name = name;
+        this.title = title;
     }
 
     public String getWide() {
@@ -23,5 +26,13 @@ public class HeaderCell {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

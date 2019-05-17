@@ -3,151 +3,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>INC product</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i"
+          rel="stylesheet">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1 user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1 user-scalable=no">
     <link href="/css/inc.css" rel="stylesheet" media="screen" th:href="@{/css/inc.css}"/>
-    <style>
-        * {
-            box-sizing:border-box;
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        body {
-            font-family:'Roboto', sans-serif;
-            font-weight:300;
-            font-size:12px;
-        }
-
-        main {
-            -webkit-flex:1;
-            -ms-flex:1;
-            flex: 1;
-            flex-grow:3;
-            min-width:1000px;
-            padding:10px;
-
-        }
-
-        aside {
-            -webkit-flex:1;
-            -ms-flex:1;
-            flex:1;
-            flex-grow:1;
-            min-width:500px;
-            padding:10px;
-
-        }
-
-        figure{
-
-            padding:0;
-            width: 366px;
-            height: auto;
-            overflow:hidden;
-            margin:0;
-        }
-        figure img{
-            display:block;
-            width: 100%;
-
-        }
-
-        table {
-            display:table;
-            border-collapse:collapse;
-            box-sizing: border-box;
-            border-style: solid;
-            border-width: 1px;
-            border-color: rgb(91, 125, 139);
-            color: #3d3d3d;
-            background-color: #ffffff ;
-            align-content: center;
-            padding: 0.5em 1px;
-            font-size: 0.9em;
-            font-weight: 100;
-
-        }
-        table td {
-            display: table-cell;
-            border-spacing: 0px;
-            border-left-color:rgb(91, 125, 139);
-            border-left-style: solid;
-            border-left-width: 1px;
-            border-bottom-color: rgb(91, 125, 139);
-            border-bottom-style: solid;
-            border-bottom-width: 1px;
-            text-align: center;
-            padding: 7px 2px;
-            font-weight: 300;
-
-        }
-
-        header {
-            background-color: #f1f1f1;
-            height:150px;
-            width: 100vw;
-            min-width:1000px;
-            padding: 0 2vw;
-            display: flex;
-            justify-content: space-between;
-            align-items:center;
-
-            font-size: 35px;
-
-        }
-
-        .change-ratio img{
-            margin:-14% 0;
-        }
-        .tableHeader{
-            color: #fff;
-            background-color: rgb(91, 125, 139) ;
-            align-content: center;
-            font-weight: 400;
-        }
-
-
-
-        /* Style the header */
-
-
-        /* Container for flexboxes */
-        .row {
-            display: -webkit-flex;
-            display: flex;
-        }
-
-        /* Create three equal columns that sits next to each other */
-        .column {
-            -webkit-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-            max-width: 500px;
-            padding: 10px;
-
-        }
-
-        /* Style the footer */
-        .footer {
-            background-color: #f1f1f1;
-            padding: 10px;
-            text-align: center;
-        }
-
-        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-        @media (max-width:1000px) {
-            .row {
-                -webkit-flex-direction: column;
-                flex-direction: column;
-            }
-            figure {
-                display: none;
-            }
-            figure img {
-                display: none;
-            }
-        }
-    </style>
 </head>
 <body>
 <div th:insert="~{/navigation.html :: mainMenu}">
@@ -155,14 +18,13 @@
 </div>
 
 
-<header class="change-ratio">
+<header>
 
-    <h2  style="align-items: center; padding-left: 40px" th:text="${product_data.name}">Header</h2>
+    <h2 style="align-items: center; padding-left: 40px" th:text="${product_data.title}">Header</h2>
 
-    <figure>
-        <img style="opacity: 0.7"  th:src="${product_data.imageFile}" src="/images/02-466-235x.jpg" alt="02-466-235">
+    <figure class="change-ratio">
+        <img th:src="${product_data.imageFile}" src="/images/02-466-235x.jpg" alt="02-466-235">
     </figure>
-
 
 
 </header>
@@ -172,50 +34,50 @@
 
         <article>
 
-            <section th:each="product_section : ${product_data.sectionList}">
+            <section th:each="product_section : ${product_data.sectionDtoList}">
 
                 <div class="row">
-                    <div class="column" >
-                        <img style="width: 100%" th:src="${product_section.imageFile}" src="/images/02-466-235x.jpg" alt="02-466-235">
+                    <div class="column">
+                        <img th:class="myImg" style="width: 100%" th:src="${product_section.imageFile}"
+                             src="/images/02-466-235x.jpg" th:alt="${product_section.imageFile}">
+
+
                     </div>
 
-                    <div class="column" style="margin-top: 1em">
+                    <div class="column">
 
                         <div th:each="table : ${product_section.tableList}">
 
                             <div th:with="header=${table.header}">
 
-                                <h2 th:unless="${#strings.isEmpty(header)}"  th:text="${header}">Tu będą tabele</h2>
+                                <h3 style="font-family: 'Roboto', sans-serif;
+                                    font-size: 20px;
+                                    font-weight: 400;
+                                    margin: 0 0 10px 0;" th:text="${header}">Tu będą tabele</h3>
 
                             </div>
 
-                        <table>
-                            <div>
-                                <tr class="tableHeader" >
-                                    <td th:each="cell : ${table.tableHeader}" style="font-weight: bold"
-                                    th:width="${cell.wide}" th:text="${cell.name}">Rozmiar</td>
+                            <table>
+                                <div>
+                                    <tr>
+                                        <td class="tableHeader" th:each="cell : ${table.tableHeader}"
+                                            style="font-weight: bold"
+                                            th:width="${cell.wide}" th:text="${cell.title}">Rozmiar
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                            </div>
-                            <div>
-                                <tr style="align-content: center" th:each="row : ${table.tableRowList}">
-                                    <td th:each="cell : ${row}" th:text="${cell}" >TĘPE-TĘPE</th>
+                                </div>
+                                <div>
+                                    <tr style="align-content: center" th:each="row : ${table.tableRowList}">
+                                        <td th:each="cell : ${row}" th:text="${cell}">TĘPE-TĘPE
+                                        </th>
 
-                                </tr>
-                                <tr style="align-content: center">
-                                    <td>OSTRE-TĘPE</td>
-                                    <td>13-110</td>
-                                    <td>13-112</td>
-                                    <td>13-115</td>
-                                    <td>13-116</td>
-                                    <td>13-118</td>
-                                </tr>
-
-                            </div>
+                                    </tr>
+                                </div>
 
 
-                        </table>
+                            </table>
                             <p th:text="${table.descrtiption}"></p>
                         </div>
                         <p>Some text..</p>
@@ -224,16 +86,32 @@
                     </div>
                 </div>
                 <p style="border-bottom: 1px solid #ddd;"></p>
+
+
             </section>
 
 
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
 
+                <!-- The Close Button -->
+                <span class="close">&times;</span>
+
+                <!-- Modal Content (The Image) -->
+                <img class="modal-content" id="img01">
+
+                <!-- Modal Caption (Image Text) -->
+                <div id="caption"></div>
+            </div>
 
         </article>
 
     </main>
 
-    <aside style="background-color:lightslategrey">
+    <aside>
+
+        <!-- The form -->
+        <div th:replace="~{/side_bar.html :: sideBar (${categories})}">
 
     </aside>
 
@@ -243,5 +121,33 @@
     <p>Footer</p>
 </div>
 
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementsByClassName('myImg');
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    var i;
+    for (i = 0; i < img.length; i++) {
+        img[i].onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+</script>
+
+
 </body>
+
 </html>
