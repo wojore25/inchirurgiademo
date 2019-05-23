@@ -8,25 +8,25 @@
 </head>
 <body>
 
-<div class="sidePanel" th:fragment="sideBar (cathegory_list)">
+<div class="sidePanel" th:fragment="sideBar (product_categories)">
 
     <h3>Szukaj</h3>
 
     <!-- The form -->
-    <form class="example" action="action_page.php">
+    <form class="example" action="/search">
         <input type="text" placeholder="Search.." name="search">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 
     <h3 style="padding-top: 30px">Kategorie</h3>
 
-    <form action="/search_category">
+    <form action="/category">
 
         <ul>
 
-            <li th:each="cathegory : ${cathegory_list}">
+            <li th:each="product_category : ${product_categories}">
 
-                <input type="submit" name="submit" th:value="${cathegory}">
+                <input type="submit" name="category" th:value="${product_category}">
 
             </li>
 

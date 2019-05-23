@@ -21,11 +21,11 @@
 <header>
 
     <h2 style="align-items: center; padding-left: 40px" th:text="${product_data.title}">Header</h2>
-
-    <figure class="change-ratio">
-        <img th:src="${product_data.imageFile}" src="/images/02-466-235x.jpg" alt="02-466-235">
-    </figure>
-
+    <div style="width: 332px">
+        <figure class="change-ratio">
+            <img th:src="${product_data.imageFile}" src="/images/02-466-235x.jpg" alt="02-466-235">
+        </figure>
+    </div>
 
 </header>
 
@@ -80,7 +80,7 @@
                             </table>
                             <p th:text="${table.descrtiption}"></p>
                         </div>
-                        <p>Some text..</p>
+
 
 
                     </div>
@@ -111,7 +111,7 @@
     <aside>
 
         <!-- The form -->
-        <div th:replace="~{/side_bar.html :: sideBar (${categories})}">
+        <div th:replace="~{/side_bar.html :: sideBar (${product_categories})}">
 
     </aside>
 

@@ -1,16 +1,17 @@
 package com.internet.inchirurgiademo.controller;
 
 
-import com.internet.inchirurgiademo.dto.*;
+import com.internet.inchirurgiademo.dto.PortfolioDto;
+import com.internet.inchirurgiademo.dto.ProductDto;
 import com.internet.inchirurgiademo.services.PortfolioService;
 import com.internet.inchirurgiademo.services.ProductService;
-import com.internet.inchirurgiademo.temp.*;
+import com.internet.inchirurgiademo.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -22,44 +23,91 @@ public class PageController {
     @Autowired
     private PortfolioService portfolioService;
 
+    @Autowired
+    private TagService tagService;
+
     @GetMapping("/product")
-    public String returnProdactPage(Model model){
+    public String returnProductPage(Model model, @ModelAttribute(name = "id") Long id) {
 
-        ProductDto product = productService.findProductDto(23l);
+        ProductDto product = productService.findProductDto(id);
 
-        List<String> categories= new LinkedList<>();
-        categories.add("NOŻYCZKI");
-        categories.add("PINCETY");
-
-
+        List<String> categories = tagService.listCategories();
 
         model.addAttribute("product_data", product);
-        model.addAttribute("categories", categories);
+        model.addAttribute("product_categories", categories);
 //        model.addAttribute("table_row", pnTable.getTableRowList());
 
 
         return "product_view";
     }
 
-    @GetMapping("/portfolio")
-    public String returnPortfolioPage(Model model){
 
-        PortfolioDto portfolioDto = portfolioService.findPortfolioDto(325l);
+    @GetMapping("/start")
+    public String returnStartPage(Model model) {
 
-        List<String> categories= new LinkedList<>();
-        categories.add("NOŻYCZKI");
-        categories.add("PINCETY");
+        PortfolioDto portfolioDto = portfolioService.findPortfolioDto(1l);
 
-        model.addAttribute("portfolio_data", portfolioDto);
-        model.addAttribute("categories", categories);
-
+        setupPortfolioModel(model, portfolioDto);
 
 
         return "portfolio_view";
     }
 
+    @GetMapping("/portfolio")
+    public String returnPortfolioPage(Model model, @ModelAttribute(name = "id") Long id) {
+
+
+        PortfolioDto portfolioDto = portfolioService.findPortfolioDto(id);
+
+        setupPortfolioModel(model, portfolioDto);
+
+        return "portfolio_view";
+    }
+
+    @GetMapping("/category")
+    public String returnSearchPage(Model model, @ModelAttribute(name = "category") String category) {
+
+
+        PortfolioDto portfolioDto = new PortfolioDto();
+        portfolioDto.setTitle("Kategoria: " + category);
+        portfolioDto.setPostDtoList(portfolioService.findPostDtoWithTag(category));
+
+        setupPortfolioModel(model, portfolioDto);
+
+        return "portfolio_view";
+    }
+
+
+    @GetMapping("/search")
+    public String search(Model model, @ModelAttribute(name = "search") String search) {
+
+        PortfolioDto portfolioDto = new PortfolioDto();
+        portfolioDto.setTitle("Wyszukiwanie: " + search);
+        portfolioDto.setPostDtoList(portfolioService.findSearchedPosts(search));
+
+        setupPortfolioModel(model, portfolioDto);
+
+
+        return "portfolio_view";
+    }
+
+
     @GetMapping("/menu")
-    public String menu(){
+    public String menu() {
         return "navigation";
+    }
+
+    @GetMapping("/rodo")
+    public String rodoPage(Model model){
+        List<String> categories = tagService.listCategories();
+        model.addAttribute("product_categories", categories);
+        return "rodo";
+    }
+
+
+    private void setupPortfolioModel(Model model, PortfolioDto portfolioDto) {
+        model.addAttribute("portfolio_data", portfolioDto);
+        List<String> categories = tagService.listCategories();
+        model.addAttribute("product_categories", categories);
     }
 }

@@ -14,14 +14,17 @@ public class Tag {
     @Column(name = "term_id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
+
+    @OneToOne(mappedBy = "tag")
+    private TagTaxonomy type;
 
     @JoinTable(name = "tags_relations",
             joinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "term_id")},
             inverseJoinColumns = {@JoinColumn(name = "post_id", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY,
-                cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Post> postList = new ArrayList<>();
 
     public Tag() {
@@ -42,6 +45,24 @@ public class Tag {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TagTaxonomy getType() {
+        return type;
+    }
+
+    public void setType(TagTaxonomy type) {
+        this.type = type;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

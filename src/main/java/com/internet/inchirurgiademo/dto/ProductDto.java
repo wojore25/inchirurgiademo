@@ -5,6 +5,7 @@ import java.util.List;
 
 public class ProductDto extends PostDto {
     List<SectionDto> sectionDtoList;
+    List<TagDto> tagDtoList;
 
 
     @Override
@@ -24,6 +25,23 @@ public class ProductDto extends PostDto {
             this.sectionDtoList = new LinkedList<>();
         }
         if (sectionDto != null) this.sectionDtoList.add(sectionDto);
+    }
+
+    public void setSectionDtoList(List<SectionDto> sectionDtoList) {
+        this.sectionDtoList = sectionDtoList;
+    }
+
+    public List<TagDto> getTagDtoList() {
+        return tagDtoList;
+    }
+
+    public void setTagDtoList(List<TagDto> tagDtoList) {
+        this.tagDtoList = tagDtoList;
+    }
+
+    public void addTagDto(TagDto tagDto){
+        if (this.getTagDtoList() == null) this.tagDtoList = new LinkedList<>();
+        this.tagDtoList.add(tagDto);
     }
 }
 

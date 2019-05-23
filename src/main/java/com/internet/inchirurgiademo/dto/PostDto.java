@@ -1,5 +1,7 @@
 package com.internet.inchirurgiademo.dto;
 
+import java.util.List;
+
 public abstract class PostDto {
     private Long id;
     private String title;

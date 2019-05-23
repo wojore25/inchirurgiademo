@@ -21,19 +21,6 @@ figure img{
 
 }
 
-.portfolio_box {
-    padding:0;
-    width:450px;
-    overflow:hidden;
-    margin:0;
-}
-
-.portfolio_box img{
-    display: block;
-    width: 100%;
-
-
-}
 .new-ratio img{
     margin: -15% 0 -15% 0;
     border-bottom: 3px solid rgb(164, 225, 250);
@@ -47,10 +34,12 @@ figure img{
 /* page header  */
 
 header {
-    background-color: #f1f1f1;
+    margin: 0;
+    background-color: #00cc99;
     height:150px;
     min-width:1000px;
-    padding:0 0 0 0;
+    padding:0
+;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -59,7 +48,7 @@ header {
 header h2 {
     font-size:35px;
     font-weight:400;
-    padding-right: 40px;
+    padding-right: 12px;
 }
 
 
@@ -69,9 +58,9 @@ header h2 {
 .header {
     overflow: hidden;
     background-color: #ffffff;
-    padding: 20px 10px 20px 0;
+    padding: 20px 10px 20px 10px;
     font-size: 18px;
-    text-align: left;
+    text-align: center;
 
 }
 .header p {
@@ -84,9 +73,10 @@ header h2 {
 
 .header a {
     float: left;
-    color: black;
+    background-color: #00cc99;
+    color: white;
     text-align: center;
-    padding: 12px 0 12px 12px;
+    padding: 12px 12px 12px 12px;
     text-decoration: none;
     font-size: 18px;
     line-height: 25px;
@@ -95,13 +85,14 @@ header h2 {
 
 .header a.logo {
     padding: 0;
+    background-color: white;
     font-size: 18px;
     font-weight: bold;
     text-align: left;
 }
 
 .header a:hover {
-    background-color: #ddd;
+    background-color:  #009973;
     color: black;
 }
 
@@ -131,7 +122,6 @@ main {
 .row {
     display: -webkit-flex;
     display: flex;
-    margin: 20px 0;
 }
 
 /* Create three equal columns that sits next to each other */
@@ -255,12 +245,7 @@ form.example::after {
         -webkit-flex-direction: column;
         flex-direction: column;
     }
-    figure {
-        display: none;
-    }
-    figure img {
-        display: none;
-    }
+
 
 }
 
