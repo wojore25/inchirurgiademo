@@ -1,0 +1,385 @@
+* {
+    box-sizing:border-box;
+}
+
+body {
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
+    font-size:12px;
+    color: #3d3d3d;
+}
+
+figure{
+    padding:0;
+    width: 100%;
+    overflow:hidden;
+    margin:0;
+}
+figure img{
+    display:block;
+    width: 100%;
+
+}
+
+.change-ratio img{
+    margin:-12% 0;
+}
+
+/* page header  */
+
+header {
+    margin: 0;
+    background-color: #00cc99;
+    height:150px;
+    min-width:1000px;
+    padding:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h2 {
+    font-size:35px;
+    font-weight:400;
+    padding-right: 12px;
+}
+
+
+
+/* navigation menu */
+
+.header {
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 20px 10px 20px 10px;
+    font-size: 18px;
+    text-align: center;
+
+}
+.header p {
+    padding: 0;
+    font-size: 14px;
+    font-weight: 300;
+    color: red;
+
+}
+
+.header a {
+    float: left;
+    background-color: #00cc99;
+    color: white;
+    text-align: center;
+    padding: 12px 12px 12px 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 2px;
+}
+
+.header a.logo {
+    padding: 0;
+    background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.header a:hover {
+    background-color:  #009973;
+    color: black;
+}
+
+.header a.active {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.header-right {
+    float: right;
+}
+
+/*  page main content  */
+
+main {
+    -webkit-flex:1;
+    -ms-flex:1;
+    flex:1;
+    flex-grow:3;
+    min-width:1000px;
+    padding:20px;
+
+}
+
+/*  division into columns  */
+/* Container for flexboxes */
+.row {
+    display: -webkit-flex;
+    display: flex;
+}
+
+/* Create three equal columns that sits next to each other */
+.column {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    max-width: 500px;
+    padding: 10px;
+
+}
+
+
+table {
+    display:table;
+    border-collapse:collapse;
+    box-sizing: border-box;
+    border-style:solid;
+    border-width: 1px;
+    border-color:rgb(91, 125, 139);
+    color:#3d3d3d;
+    background-color:#ffffff ;
+    align-content:center;
+    padding:0.5em 1px;
+    font-size:0.9em;
+    font-weight:100;
+
+}
+table td {
+    display: table-cell;
+    border-spacing:0px;
+    border-left-color:rgb(91, 125, 139);
+    border-left-style:solid;
+    border-left-width:1px;
+    border-bottom-color:rgb(91, 125, 139);
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    text-align: center;
+    padding: 7px 2px;
+    font-weight: 300;
+
+}
+
+table tr:nth-child(odd) {
+    background-color: #f2f2f2
+}
+
+/* Style the header */
+
+
+
+
+
+.tableHeader{
+    color: #fff;
+    background-color:rgb(91, 125, 139) ;
+    align-content: center;
+    font-weight: 400;
+}
+
+/* image zoom */
+
+/* Style the Image Used to Trigger the Modal */
+.myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1000px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+aside {
+    -webkit-flex:1;
+    -ms-flex:1;
+    flex:1;
+    flex-grow:1;
+
+    padding:0 0px 0 0;
+    margin: 10px;
+    border-left: 1px solid rgb(164, 225, 250);
+
+
+}
+
+.sidePanel {
+    margin: 10px;
+    padding: 0 10px;
+    width: inherit;
+}
+
+.sidePanel h3{
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 15px;
+    border-bottom: 4px solid #202060;
+
+}
+.sidePanel ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.sidePanel li{
+    width: 100%;
+    list-style: none;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 8px 0;
+    border-bottom: 1px solid #ececec;
+}
+.sidePanel input[type='submit']{
+    width: 100%;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #ffffff;
+    color: #3d3d3d;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+}
+
+/* search field */
+form {
+    width: inherit;
+}
+
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+}
+
+/* Style the submit button */
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+}
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width:1000px) {
+    .row {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .header a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+    .header-right {
+        float: none;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>INC product</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i"
+          rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1 user-scalable=no">
+    <link href="/css/inc.css" rel="stylesheet" media="screen" th:href="@{/css/inc.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<div th:insert="~{/navigation.html :: mainMenu}">
+
+</div>
+
+
+<header>
+
+    <h2 style="align-items: center; padding-left: 40px" th:text="${product_data.title}">Header</h2>
+    <div style="width: 332px">
+        <figure class="change-ratio">
+            <img th:src="${product_data.imageFile}" src="/images/02-466-235x.jpg" alt="02-466-235">
+        </figure>
+    </div>
+
+</header>
+
+<div class="row">
+    <main>
+
+        <article>
+
+            <section th:each="product_section : ${product_data.sectionDtoList}">
+
+                <div class="row">
+                    <div class="column">
+                        <img th:class="myImg" style="width: 100%" th:src="${product_section.imageFile}"
+                             src="/images/02-466-235x.jpg" th:alt="${product_section.imageFile}">
+
+
+                    </div>
+
+                    <div class="column">
+
+                        <div th:each="table : ${product_section.tableList}">
+
+                            <div th:with="header=${table.header}">
+
+                                <h3 style="font-family: 'Roboto', sans-serif;
+                                    font-size: 20px;
+                                    font-weight: 400;
+                                    margin: 0 0 10px 0;" th:text="${header}">Tu będą tabele</h3>
+
+                            </div>
+
+                            <table>
+                                <div>
+                                    <tr>
+                                        <td class="tableHeader" th:each="cell : ${table.tableHeader}"
+                                            style="font-weight: bold"
+                                            th:width="${cell.wide}" th:text="${cell.title}">Rozmiar
+                                        </td>
+
+                                    </tr>
+
+                                </div>
+                                <div>
+                                    <tr style="align-content: center" th:each="row : ${table.tableRowList}">
+                                        <td th:each="cell : ${row}" th:text="${cell}">TĘPE-TĘPE
+                                        </th>
+
+                                    </tr>
+                                </div>
+
+
+                            </table>
+                            <p th:text="${table.descrtiption}"></p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <p style="border-bottom: 1px solid #ddd;"></p>
+
+
+            </section>
+
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- The Close Button -->
+                <span class="close">&times;</span>
+
+                <!-- Modal Content (The Image) -->
+                <img class="modal-content" id="img01">
+
+                <!-- Modal Caption (Image Text) -->
+                <div id="caption"></div>
+            </div>
+
+        </article>
+
+    </main>
+
+    <aside>
+
+        <!-- The form -->
+        <div th:replace="~{/side_bar.html :: sideBar (${product_categories})}">
+
+    </aside>
+
+</div>
+
+<div class="footer">
+    <p>Footer</p>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementsByClassName('myImg');
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    var i;
+    for (i = 0; i < img.length; i++) {
+        img[i].onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+</script>
+
+
+</body>
+
+</html>

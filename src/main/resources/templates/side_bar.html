@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<div class="sidePanel" th:fragment="sideBar (product_categories)">
+
+    <h3>Szukaj</h3>
+
+    <!-- The form -->
+    <form class="example" action="/search">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <h3 style="padding-top: 30px">Kategorie</h3>
+
+    <form action="/category">
+
+        <ul>
+
+            <li th:each="product_category : ${product_categories}">
+
+                <input type="submit" name="category" th:value="${product_category}">
+
+            </li>
+
+        </ul>
+    </form>
+
+
+</div>
+
+</body>
+</html>
