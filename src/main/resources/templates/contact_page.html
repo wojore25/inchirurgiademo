@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>INC portfolio</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i"
+          rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1 user-scalable=no">
+    <link href="/css/inc.css" rel="stylesheet" media="screen" th:href="@{/css/portfolio.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<div th:insert="~{/navigation.html :: mainMenu}">
+
+</div>
+
+
+<header>
+
+    <h2 style="margin: 0; align-items: center; padding-left: 40px" >KONTAKT</h2>
+
+</header>
+
+<div class="row">
+    <main>
+
+        <article>
+
+
+            <section>
+
+                <div class="row">
+
+                    <div class="column" style="justify-content: center">
+
+                    </div>
+                    <!-- second column -->
+                    <div class="column" style="justify-content: center">
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+        </article>
+
+    </main>
+
+
+    <aside>
+
+        <!-- The form -->
+        <div th:replace="~{/side_bar.html :: sideBar (${product_categories})}">
+
+    </aside>
+
+</div>
+
+<div class="footer">
+    <p>Footer</p>
+</div>
+
+
+</body>
+
+</html>
