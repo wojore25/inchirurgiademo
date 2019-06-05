@@ -3,14 +3,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>INC portfolio</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i"
-          rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1 user-scalable=no">
     <link href="/css/inc.css" rel="stylesheet" media="screen" th:href="@{/css/portfolio.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div th:insert="~{/navigation.html :: mainMenu}">
@@ -18,11 +19,11 @@
 </div>
 
 
-<header>
+<header style="display:flex;">
 
-    <h2 style="margin: 0; align-items: center; padding-left: 40px" th:text="${portfolio_data.title}">Header</h2>
+    <h2 th:text="${portfolio_data.title}">Header</h2>
     <div style="width: 332px">
-        <figure class="change-ratio">
+        <figure class="change-ratio" style="margin-bottom: 0">
             <img th:src="${portfolio_data.getImageFile()}" src="/images/02-466-235x.jpg"
                  th:alt="${portfolio_data.title}">
         </figure>
@@ -40,7 +41,7 @@
 
                 <div class="row">
 
-                    <div class="column" style="justify-content: center">
+                    <div class="column" style="justify-content: center; margin: 40px">
                         <form
                                 th:with="dataIndex=((${index}*2))"
                                 th:action="'/' + ${portfolio_data.postDtoList.get(dataIndex).getStatus()}">
@@ -69,7 +70,7 @@
                         </form>
                     </div>
                     <!-- second column -->
-                    <div class="column" style="justify-content: center">
+                    <div class="column" style="justify-content: center; margin: 40px">
                         <form th:if="((${index}*2)+1) < ${portfolio_data.postDtoList.size()}"
                               th:with="dataIndex=((${index}*2)+1)"
                               th:action="'/' + ${portfolio_data.postDtoList.get(dataIndex).getStatus()}">

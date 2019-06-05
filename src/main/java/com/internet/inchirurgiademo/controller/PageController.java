@@ -1,6 +1,7 @@
 package com.internet.inchirurgiademo.controller;
 
 
+import com.internet.inchirurgiademo.dto.ContactDto;
 import com.internet.inchirurgiademo.dto.PortfolioDto;
 import com.internet.inchirurgiademo.dto.ProductDto;
 import com.internet.inchirurgiademo.services.PortfolioService;
@@ -9,9 +10,13 @@ import com.internet.inchirurgiademo.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -104,6 +109,24 @@ public class PageController {
         return "rodo";
     }
 
+    @GetMapping("/contact")
+    public String contactPage(Model model){
+
+        ContactDto contactDto = new ContactDto();
+        model.addAttribute("contact_data", contactDto);
+
+        List<String> categories = tagService.listCategories();
+        model.addAttribute("product_categories", categories);
+
+        return "contact_page";
+    }
+
+    @RequestMapping("/processContact")
+    public String processContact(@Valid @ModelAttribute("contact_data") ContactDto contactDto,
+                                 BindingResult bindingResult){
+        if (bindingResult.hasErrors()) return "/contact_page";
+        return "redirect:/start";
+    }
 
     private void setupPortfolioModel(Model model, PortfolioDto portfolioDto) {
         model.addAttribute("portfolio_data", portfolioDto);

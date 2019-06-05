@@ -3,13 +3,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>INC portfolio</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i"
-          rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1 user-scalable=no">
     <link href="/css/inc.css" rel="stylesheet" media="screen" th:href="@{/css/portfolio.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -18,9 +20,9 @@
 </div>
 
 
-<header>
+<header style="display:flex;">
 
-    <h2 style="margin: 0; align-items: center; padding-left: 40px" >KONTAKT</h2>
+    <h2>KONTAKT</h2>
 
 </header>
 
@@ -34,11 +36,65 @@
 
                 <div class="row">
 
-                    <div class="column" style="justify-content: center">
+                    <div class="column" style="justify-content: left; margin: 40px;">
+
+                        <h4>Kontakt</h4>
+                        I.N.C. Anna Orechwa<br>
+                        ul. Poniatowskiego 6B<br>
+                        05-500 Piaseczno<br><br>
+
+                        Fax: 22 877 48 32<br>
+                        Tel.: 664 425 548<br>
+                        Strona internetowa: inchirurgia.pl<br>
+                        Email: a.w.orechwa@chello.pl<br>
 
                     </div>
                     <!-- second column -->
-                    <div class="column" style="justify-content: center">
+                    <div class="column" style="justify-content: left; margin: 40px;">
+                        <h4>Formularz kontaktowy</h4>
+                        <form class="was-validated" action="/processContact" th:object="${contact_data}" method="post">
+                            <div class="form-group">
+                                <label for="name">Imię i nazwisko:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Imię i nazwisko"
+                                       th:field="*{name}">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" placeholder="email (wymagane)"
+                                       th:field="*{email}">
+                                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Temat:</label>
+                                <input type="text" class="form-control" id="subject" placeholder="Temat"
+                                       th:field="*{subject}">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Wiadomość:</label>
+                                <textarea class="form-control" rows="5" id="message" placeholder="Treść wiadomośći"
+                                          th:field="*{message}"/>
+                                <p th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></p>
+                            </div>
+                            <div class="form-group form-check">
+
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="agreement"
+                                           th:field="*{rodoConfirmation}" value="true" required>
+
+                                    <div class="valid-feedback">Wyrażam zgodę na przetwarzanie przez
+                                        I.N.C. Anna Orechwa z siedzibą w Piasecznie, ul. Poniatowskiego 6b lok. 6
+                                        , 05-500 Piaseczn, moich danych osobowych zawartych w formularzu kontaktowym
+                                        w celu otrzymania informacji cenowych lub przygotowania umowy.
+                                        Zapoznałem się z <a href="/rodo"> POLITYKĄ PRZETWARZANIA DANYCH OSOBOWYCH</a></div>
+                                    <div class="invalid-feedback"Wyrażam zgodę na przetwarzanie przez
+                                         I.N.C. Anna Orechwa z siedzibą w Piasecznie, ul. Poniatowskiego 6b lok. 6
+                                         , 05-500 Piaseczn, moich danych osobowych zawartych w formularzu kontaktowym
+                                         w celu otrzymania informacji cenowych lub przygotowania umowy.
+                                         Zapoznałem się z <a href="/rodo"> POLITYKĄ PRZETWARZANIA DANYCH OSOBOWYCH</a></div>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Wyślij</button>
+                        </form>
 
                     </div>
 
@@ -70,3 +126,6 @@
 </body>
 
 </html>
+
+
+<!--td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td-->
