@@ -13,6 +13,78 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+    <style>
+
+
+        /* The Modal (background) */
+        .rodo {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 50px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .rodo-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .rodo-header {
+            padding: 2px 16px;
+            background-color: #00cc99;
+        }
+
+        .rodo-body {padding: 2px 16px;}
+
+        .rodo-footer {
+            padding: 2px 16px;
+            background-color: #00cc99;
+        }
+    </style>
+
 </head>
 <body>
 <div th:insert="~{/navigation.html :: mainMenu}">
@@ -60,18 +132,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" placeholder="email (wymagane)"
+                                <input type="email" class="form-control" id="email" th:placeholder="*{email}"
                                        th:field="*{email}">
                                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                             </div>
                             <div class="form-group">
                                 <label for="subject">Temat:</label>
-                                <input type="text" class="form-control" id="subject" placeholder="Temat"
+                                <input type="text" class="form-control" id="subject" th:placeholder="*{subject}"
                                        th:field="*{subject}">
                             </div>
                             <div class="form-group">
                                 <label for="message">Wiadomość:</label>
-                                <textarea class="form-control" rows="5" id="message" placeholder="Treść wiadomośći"
+                                <textarea class="form-control" rows="5" id="message" th:placeholder="*{message}"
                                           th:field="*{message}"/>
                                 <p th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></p>
                             </div>
@@ -79,18 +151,21 @@
 
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="checkbox" name="agreement"
-                                           th:field="*{rodoConfirmation}" value="true" required>
+                                           th:field="*{rodoConfirmation}" value="true">
 
                                     <div class="valid-feedback">Wyrażam zgodę na przetwarzanie przez
                                         I.N.C. Anna Orechwa z siedzibą w Piasecznie, ul. Poniatowskiego 6b lok. 6
                                         , 05-500 Piaseczn, moich danych osobowych zawartych w formularzu kontaktowym
                                         w celu otrzymania informacji cenowych lub przygotowania umowy.
-                                        Zapoznałem się z <a href="/rodo"> POLITYKĄ PRZETWARZANIA DANYCH OSOBOWYCH</a></div>
-                                    <div class="invalid-feedback"Wyrażam zgodę na przetwarzanie przez
-                                         I.N.C. Anna Orechwa z siedzibą w Piasecznie, ul. Poniatowskiego 6b lok. 6
-                                         , 05-500 Piaseczn, moich danych osobowych zawartych w formularzu kontaktowym
-                                         w celu otrzymania informacji cenowych lub przygotowania umowy.
-                                         Zapoznałem się z <a href="/rodo"> POLITYKĄ PRZETWARZANIA DANYCH OSOBOWYCH</a></div>
+                                        Zapoznałem się z <button type="button" id="rodoButton"> POLITYKĄ PRZETWARZANIA DANYCH OSOBOWYCH</button>
+                                    </div>
+                                    <div class="invalid-feedback"> Wyrażam zgodę na przetwarzanie przez
+                                        I.N.C. Anna Orechwa z siedzibą w Piasecznie, ul. Poniatowskiego 6b lok. 6
+                                        , 05-500 Piaseczn, moich danych osobowych zawartych w formularzu kontaktowym
+                                        w celu otrzymania informacji cenowych lub przygotowania umowy.
+                                        Zapoznałem się z
+                                        <button type="button" id="rodoButton"> POLITYKĄ PRZETWARZANIA DANYCH OSOBOWYCH</button>
+                                    </div>
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-primary">Wyślij</button>
@@ -102,6 +177,135 @@
                 </div>
 
             </section>
+
+            <!-- The Modal -->
+            <div id="myRODO" class="rodo">
+
+
+                <!-- Modal Content (RODO info) -->
+                <div class="rodo-content">
+                    <div class="rodo-header">
+                        <span class="close">&times;</span>
+                        <h2>Polityka przetwarzania danych</h2>
+                    </div>
+                    <div class="rodo-body">
+                        <h2 style="font-size: 24px; font-weight: 400">Informacja o przetwarzaniu
+                            danych osobowych przez I.N.C Anna Orechwa</h2>
+
+                        <article style="font-size: 20px">
+                            Na podstawie art. 13 Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27
+                            kwietnia
+                            2016 r.
+                            w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie
+                            swobodnego
+                            przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie
+                            danych),
+                            informujemy, że:
+                            <ol>
+                                <li>Administratorem Pani/Pana danych osobowych jest Anna Orechwa, 05-500 Piaseczno,
+                                    ul. Poniatowskiego 6B lok. 6, adres e-mail: a.w.orechwa@chello.pl;
+                                </li>
+                                <li>Pani/Pana dane będą przetwarzane w celu:</li>
+                                <ul>
+                                    <li>wykonania umowy, której stroną jest osoba, której dane dotyczą, lub do podjęcia
+                                        działań na
+                                        żądanie
+                                        osoby, której dane dotyczą, przed zawarciem umowy (podstawa art. 6 ust 1 pkt. b
+                                        RODO);
+                                    </li>
+
+                                    <li>wypełnienia obowiązku prawnego ciążącego na administratorze (podstawa art. 6 ust
+                                        1 pkt. c
+                                        RODO);
+                                    </li>
+
+                                    <li>do celów działań związanych z dochodzeniem roszczeń i obsługą roszczeń,
+                                        reklamacji,
+                                        gwarancji,
+                                        wynikających z prawnie uzasadnionych interesów realizowanych przez
+                                        administratora lub przez
+                                        stronę
+                                        trzecią (podstawa art. 6 ust 1 pkt. f RODO);
+                                    </li>
+
+                                    <li>przesyłania informacji marketingowych na podstawie Pana/Pani zgody (podstawa
+                                        art. 6 ust 1
+                                        pkt. a
+                                        RODO).
+                                    </li>
+                                </ul>
+                                <li>Pani/Pana dane osobowe możemy udostępniać następującym kategoriom podmiotów:</li>
+                                <ul>
+                                    <li>podwykonawcom: firmom księgowym, firmom transportowym, operatorom pocztowym,
+                                        kurierom,
+                                        firmom
+                                        lub osobom
+                                        świadczącym usługi prawne na rzecz Administratora Danych Osobowych.
+                                    </li>
+                                </ul>
+                                <li>Pani/Pana dane osobowe nie będą przekazywane do państw trzecich.</li>
+
+                                <li>Okres przechowywania danych:</li>
+                                <ul>
+                                    <li>Pani/Pana dane pozyskane w celu zawarcia umowy przechowujemy przez okres
+                                        negocjowania umowy
+                                        oraz
+                                        do
+                                        końca roku kalendarzowego następującego po roku, w którym ostatni raz Pani/Pan
+                                        kontaktował
+                                        się z
+                                        nami w sprawie zawarcia umowy
+                                    </li>
+
+                                    <li>Pani/Pana dane pozyskane w związku z zawarciem umowy przetwarzamy do końca
+                                        okresu
+                                        przedawnienia
+                                        potencjalnych roszczeń z umowy i upływu okresu przedawnienia zobowiązania
+                                        podatkowego
+                                    </li>
+
+                                    <li>Pani/Pana dane pozyskane w związku z wyrażeniem zgody na przetwarzanie danych w
+                                        celach
+                                        marketingowy
+                                        przechowywane są do czasu, aż Pani/Pan cofnie zgodę marketingową
+                                    </li>
+                                </ul>
+                                <li>Ma Pani/Pan prawo do:</li>
+                                <ul>
+                                    <li>dostępu do swoich danych oraz otrzymania ich kopii</li>
+
+                                    <li>sprostowania swoich danych</li>
+
+                                    <li>usunięcia danych.
+                                        Jeżeli Pani/Pana zdaniem nie ma podstaw do tego, abyśmy przetwarzali Pani/Pana
+                                        dane, może
+                                        Pani/Pan
+                                        zażądać, abyśmy je usunęli
+                                    </li>
+
+                                    <li>prawo do przenoszenia danych</li>
+
+                                    <li> wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych</li>
+
+                                    <li>cofnięcia zgody na przetwarzanie danych osobowych</li>
+                                </ul>
+                                <li>Podanie przez Panią/Pana danych jest:</li>
+                                <ul>
+                                    <li>dobrowolne</li>
+
+                                    <li>warunkiem do zawarcia umowy</li>
+                                </ul>
+                            </ol>
+
+                            W razie nie podania danych:
+                            <ul>
+                                <li>możemy odmówić zawarcia umowy.
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+
+            </div>
 
 
         </article>
@@ -125,7 +329,35 @@
 
 </body>
 
+<script>
+
+    // Get the modal
+    var rodo = document.getElementById("myRODO");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("rodoButton");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        rodo.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        rodo.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == rodo) {
+            rodo.style.display = "none";
+        }
+    }
+</script>
+
 </html>
 
 
-<!--td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td-->

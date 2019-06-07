@@ -4,21 +4,20 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 public class ContactDto {
 
 
     private String name;
 
-    @NotNull
-    @Email( message = "Podanie adresu email jest wymagane!")
+    @NotEmpty(message = "Podanie adresu email jest wymagane!")
+    @Email
     private String email;
 
     private String subject;
 
-    @NotNull
-    @Length(min = 1, message = "Wpisz wiadomość.")
+    @NotEmpty(message = "Wpisz wiadomość!")
     private String message;
 
     @AssertTrue(message = "Aby wysłać wiadomość musisz powierdzić zapoznanie się z Polityką Prywatności!")
